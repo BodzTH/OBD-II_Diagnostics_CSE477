@@ -1,0 +1,143 @@
+
+**** Clean-only build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 clean -O 
+ 
+DEL /F  "Challenge.out" 
+DEL /F "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+DEL /F "main.d" "tm4c123gh6pm_startup_ccs.d" 
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Clean-only build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 clean -O 
+ 
+DEL /F  "Challenge.out" 
+DEL /F "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+DEL /F "main.d" "tm4c123gh6pm_startup_ccs.d" 
+Could Not Find C:\Users\User\Desktop\Modules\1.GPIO_Exercises_WS\1.GPIO_Exercises_WS\Challenge\Debug\Challenge.out
+Could Not Find C:\Users\User\Desktop\Modules\1.GPIO_Exercises_WS\1.GPIO_Exercises_WS\Challenge\Debug\main.obj
+Could Not Find C:\Users\User\Desktop\Modules\1.GPIO_Exercises_WS\1.GPIO_Exercises_WS\Challenge\Debug\main.d
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../main.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="C:/Users/User/Desktop/Modules/1.GPIO_Exercises_WS/1.GPIO_Exercises_WS/Challenge" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building file: "../tm4c123gh6pm_startup_ccs.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="C:/Users/User/Desktop/Modules/1.GPIO_Exercises_WS/1.GPIO_Exercises_WS/Challenge" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="tm4c123gh6pm_startup_ccs.d_raw"  "../tm4c123gh6pm_startup_ccs.c"
+Finished building: "../tm4c123gh6pm_startup_ccs.c"
+ 
+Building target: "Example.out"
+Invoking: Arm Linker
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"Example.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="Example_linkInfo.xml" --rom_model -o "Example.out" "./main.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd"  -llibc.a 
+<Linking>
+Finished building target: "Example.out"
+ 
+
+**** Build Finished ****
+
+**** Clean-only build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 clean -O 
+ 
+DEL /F  "Example.out" 
+DEL /F "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+DEL /F "main.d" "tm4c123gh6pm_startup_ccs.d" 
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../tm4c123gh6pm_startup_ccs.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="C:/Users/User/Desktop/Modules/1.GPIO_Exercises_WS/1.GPIO_Exercises_WS/Challenge" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="tm4c123gh6pm_startup_ccs.d_raw"  "../tm4c123gh6pm_startup_ccs.c"
+Finished building: "../tm4c123gh6pm_startup_ccs.c"
+ 
+Building file: "../main.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="C:/Users/User/Desktop/Modules/1.GPIO_Exercises_WS/1.GPIO_Exercises_WS/Challenge" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building target: "Example.out"
+Invoking: Arm Linker
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"Example.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="Example_linkInfo.xml" --rom_model -o "Example.out" "./main.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd"  -llibc.a 
+<Linking>
+Finished building target: "Example.out"
+ 
+
+**** Build Finished ****
+
+**** Clean-only build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 clean -O 
+ 
+DEL /F  "Example.out" 
+DEL /F "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+DEL /F "main.d" "tm4c123gh6pm_startup_ccs.d" 
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Clean-only build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 clean -O 
+ 
+DEL /F  "Example3.out" 
+DEL /F "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+DEL /F "main.d" "tm4c123gh6pm_startup_ccs.d" 
+Could Not Find Z:\Example\Debug\Example3.out
+Could Not Find Z:\Example\Debug\main.obj
+Could Not Find Z:\Example\Debug\main.d
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../tm4c123gh6pm_startup_ccs.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/Example" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="tm4c123gh6pm_startup_ccs.d_raw"  "../tm4c123gh6pm_startup_ccs.c"
+Finished building: "../tm4c123gh6pm_startup_ccs.c"
+ 
+Building file: "../main.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/Example" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building target: "Example.out"
+Invoking: Arm Linker
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"Example.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="Example_linkInfo.xml" --rom_model -o "Example.out" "./main.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd"  -llibc.a 
+<Linking>
+Finished building target: "Example.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+gmake[1]: 'Example.out' is up to date.
+
+**** Build Finished ****
