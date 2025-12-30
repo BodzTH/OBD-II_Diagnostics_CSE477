@@ -1,0 +1,15 @@
+/*
+ * delay.c
+ *
+ *  Created on: Dec 29, 2025
+ *      Author: Bodz
+ */
+
+#include "delay.h"
+
+void Delay_MS(unsigned long long n)
+{
+    volatile unsigned long long count = 0;
+    while (count++ < (NUMBER_OF_ITERATIONS_PER_ONE_MILI_SECOND * n));
+}
+

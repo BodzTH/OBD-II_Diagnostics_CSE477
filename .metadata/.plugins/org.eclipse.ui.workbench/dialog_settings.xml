@@ -6,4 +6,6 @@
 			<item value="com.ti.common.ui.import"/>
 		</list>
 	</section>
+	<section name="org.eclipse.ui.preferences.keysPreferencePage">
+	</section>
 </section>
