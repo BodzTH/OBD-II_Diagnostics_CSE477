@@ -216,3 +216,335 @@ Finished building target: "OBD-II_Diagnostics.out"
 gmake[1]: 'OBD-II_Diagnostics.out' is up to date.
 
 **** Build Finished ****
+
+**** Build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+gmake[1]: 'Example.out' is up to date.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+gmake[1]: 'OBD-II_Diagnostics.out' is up to date.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project Example ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+gmake[1]: 'Example.out' is up to date.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../obd.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="obd.d_raw"  "../obd.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'obd.obj' failed
+"../obd.c", line 140: error #256: type name is not allowed
+"../obd.c", line 140: error #66: expected a ";"
+"../obd.c", line 140: error #20: identifier "i" is undefined
+"../obd.c", line 492: error #137: struct "<unnamed>" has no field "digit"
+At end of source: error #66: expected a ";"
+At end of source: error #68: expected a "}"
+"../obd.c", line 25: warning #179-D: variable "g_supportedPIDs_21_40" was declared but never referenced
+"../obd.c", line 26: warning #179-D: variable "g_supportedPIDs_41_60" was declared but never referenced
+"../obd.c", line 27: warning #552-D: variable "g_initialized" was set but never used
+"../obd.c", line 479: warning #179-D: function "OBD_ParseDTC" was declared but never referenced
+6 errors detected in the compilation of "../obd.c".
+gmake: *** [obd.obj] Error 1
+Building file: "../pushbutton.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="pushbutton.d_raw"  "../pushbutton.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'pushbutton.obj' failed
+"..\pushbutton.h", line 5: fatal error #1965: cannot open source file "tm4c123gh6pm.h"
+1 catastrophic error detected in the compilation of "../pushbutton.c".
+Compilation terminated.
+gmake: *** [pushbutton.obj] Error 1
+Building file: "../gpio.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="gpio.d_raw"  "../gpio.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'gpio.obj' failed
+"..\gpio.h", line 5: fatal error #1965: cannot open source file "tm4c123gh6pm.h"
+1 catastrophic error detected in the compilation of "../gpio.c".
+Compilation terminated.
+gmake: *** [gpio.obj] Error 1
+Building file: "../leds.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="leds.d_raw"  "../leds.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'leds.obj' failed
+"..\leds.h", line 5: fatal error #1965: cannot open source file "tm4c123gh6pm.h"
+1 catastrophic error detected in the compilation of "../leds.c".
+Compilation terminated.
+gmake: *** [leds.obj] Error 1
+Building file: "../can.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="can.d_raw"  "../can.c"
+Finished building: "../can.c"
+ 
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../gpio.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="gpio.d_raw"  "../gpio.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'gpio.obj' failed
+"../gpio.c", line 13: error #20: identifier "SYSCTL_RCGCGPIO_R" is undefined
+"../gpio.c", line 14: error #20: identifier "SYSCTL_PRGPIO_R" is undefined
+"../gpio.c", line 18: error #20: identifier "GPIO_O_DIR" is undefined
+"../gpio.c", line 21: error #20: identifier "GPIO_O_DEN" is undefined
+"../gpio.c", line 45: error #20: identifier "GPIO_O_PUR" is undefined
+"../gpio.c", line 47: error #20: identifier "GPIO_O_PDR" is undefined
+"../gpio.c", line 52: warning #1-D: last line of file ends without a newline
+6 errors detected in the compilation of "../gpio.c".
+gmake: *** [gpio.obj] Error 1
+Building file: "../leds.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="leds.d_raw"  "../leds.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'leds.obj' failed
+"../leds.c", line 4: error #20: identifier "SYSCTL_RCGCGPIO_R" is undefined
+"../leds.c", line 4: error #20: identifier "SYSCTL_RCGCGPIO_R5" is undefined
+"../leds.c", line 5: error #20: identifier "SYSCTL_PRGPIO_R" is undefined
+"../leds.c", line 5: error #20: identifier "SYSCTL_PRGPIO_R5" is undefined
+"../leds.c", line 7: error #20: identifier "GPIO_PORTF_LOCK_R" is undefined
+"../leds.c", line 8: error #20: identifier "GPIO_PORTF_CR_R" is undefined
+"../leds.c", line 10: error #20: identifier "GPIO_PORTF_DIR_R" is undefined
+"../leds.c", line 11: error #20: identifier "GPIO_PORTF_DEN_R" is undefined
+"../leds.c", line 16: error #20: identifier "GPIO_PORTF_DATA_R" is undefined
+"../leds.c", line 20: error #20: identifier "GPIO_PORTF_DATA_R" is undefined
+"../leds.c", line 24: error #20: identifier "GPIO_PORTF_DATA_R" is undefined
+"../leds.c", line 33: error #20: identifier "GPIO_PORTF_DATA_R" is undefined
+"../leds.c", line 34: warning #1-D: last line of file ends without a newline
+12 errors detected in the compilation of "../leds.c".
+gmake: *** [leds.obj] Error 1
+Building file: "../obd.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="obd.d_raw"  "../obd.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'obd.obj' failed
+"../obd.c", line 140: error #256: type name is not allowed
+"../obd.c", line 140: error #66: expected a ";"
+"../obd.c", line 140: error #20: identifier "i" is undefined
+"../obd.c", line 492: error #137: struct "<unnamed>" has no field "digit"
+At end of source: error #66: expected a ";"
+At end of source: error #68: expected a "}"
+"../obd.c", line 25: warning #179-D: variable "g_supportedPIDs_21_40" was declared but never referenced
+"../obd.c", line 26: warning #179-D: variable "g_supportedPIDs_41_60" was declared but never referenced
+"../obd.c", line 27: warning #552-D: variable "g_initialized" was set but never used
+"../obd.c", line 479: warning #179-D: function "OBD_ParseDTC" was declared but never referenced
+6 errors detected in the compilation of "../obd.c".
+gmake: *** [obd.obj] Error 1
+Building file: "../pushbutton.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="pushbutton.d_raw"  "../pushbutton.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'pushbutton.obj' failed
+"..\pushbutton.h", line 19: warning #48-D: incompatible redefinition of macro "SW1_PRESSED" (declared at line 8)
+"../pushbutton.c", line 6: error #20: identifier "SYSCTL_RCGCGPIO_R" is undefined
+"../pushbutton.c", line 6: error #20: identifier "SYSCTL_RCGCGPIO_R5" is undefined
+"../pushbutton.c", line 7: error #20: identifier "SYSCTL_PRGPIO_R" is undefined
+"../pushbutton.c", line 7: error #20: identifier "SYSCTL_PRGPIO_R5" is undefined
+"../pushbutton.c", line 9: error #20: identifier "GPIO_PORTF_LOCK_R" is undefined
+"../pushbutton.c", line 10: error #20: identifier "GPIO_PORTF_CR_R" is undefined
+"../pushbutton.c", line 12: error #20: identifier "GPIO_PORTF_DIR_R" is undefined
+"../pushbutton.c", line 13: error #20: identifier "GPIO_PORTF_PUR_R" is undefined
+"../pushbutton.c", line 14: error #20: identifier "GPIO_PORTF_DEN_R" is undefined
+"../pushbutton.c", line 20: error #20: identifier "GPIO_PORTF_DATA_R" is undefined
+"../pushbutton.c", line 39: warning #1-D: last line of file ends without a newline
+10 errors detected in the compilation of "../pushbutton.c".
+gmake: *** [pushbutton.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Clean-only build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 clean -O 
+ 
+DEL /F  "OBD-II_Diagnostics.out" 
+DEL /F "can.obj" "delay.obj" "gpio.obj" "leds.obj" "main.obj" "obd.obj" "pushbutton.obj" "tm4c123gh6pm_startup_ccs.obj" 
+DEL /F "can.d" "delay.d" "gpio.d" "leds.d" "main.d" "obd.d" "pushbutton.d" "tm4c123gh6pm_startup_ccs.d" 
+Could Not Find Z:\OBD-II_Diagnostics\Debug\OBD-II_Diagnostics.out
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../delay.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="delay.d_raw"  "../delay.c"
+Finished building: "../delay.c"
+ 
+Building file: "../main.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building file: "../can.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="can.d_raw"  "../can.c"
+Finished building: "../can.c"
+ 
+Building file: "../tm4c123gh6pm_startup_ccs.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="tm4c123gh6pm_startup_ccs.d_raw"  "../tm4c123gh6pm_startup_ccs.c"
+Finished building: "../tm4c123gh6pm_startup_ccs.c"
+ 
+Building target: "OBD-II_Diagnostics.out"
+Invoking: Arm Linker
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"OBD-II_Diagnostics.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="OBD-II_Diagnostics_linkInfo.xml" --rom_model -o "OBD-II_Diagnostics.out" "./can.obj" "./delay.obj" "./main.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd"  -llibc.a 
+<Linking>
+Finished building target: "OBD-II_Diagnostics.out"
+ 
+
+**** Build Finished ****
+
+**** Clean-only build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 clean -O 
+ 
+DEL /F  "OBD-II_Diagnostics.out" 
+DEL /F "can.obj" "delay.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
+DEL /F "can.d" "delay.d" "main.d" "tm4c123gh6pm_startup_ccs.d" 
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../obd.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="obd.d_raw"  "../obd.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'obd.obj' failed
+"../obd.c", line 140: error #256: type name is not allowed
+"../obd.c", line 140: error #66: expected a ";"
+"../obd.c", line 140: error #20: identifier "i" is undefined
+"../obd.c", line 492: error #137: struct "<unnamed>" has no field "digit"
+At end of source: error #66: expected a ";"
+At end of source: error #68: expected a "}"
+"../obd.c", line 25: warning #179-D: variable "g_supportedPIDs_21_40" was declared but never referenced
+"../obd.c", line 26: warning #179-D: variable "g_supportedPIDs_41_60" was declared but never referenced
+"../obd.c", line 27: warning #552-D: variable "g_initialized" was set but never used
+"../obd.c", line 479: warning #179-D: function "OBD_ParseDTC" was declared but never referenced
+6 errors detected in the compilation of "../obd.c".
+gmake: *** [obd.obj] Error 1
+Building file: "../delay.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="delay.d_raw"  "../delay.c"
+Finished building: "../delay.c"
+ 
+Building file: "../main.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building file: "../can.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="can.d_raw"  "../can.c"
+Finished building: "../can.c"
+ 
+Building file: "../tm4c123gh6pm_startup_ccs.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="tm4c123gh6pm_startup_ccs.d_raw"  "../tm4c123gh6pm_startup_ccs.c"
+Finished building: "../tm4c123gh6pm_startup_ccs.c"
+ 
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../obd.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="obd.d_raw"  "../obd.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'obd.obj' failed
+"../obd.c", line 493: error #137: struct "<unnamed>" has no field "digit"
+At end of source: error #66: expected a ";"
+At end of source: error #68: expected a "}"
+"../obd.c", line 25: warning #179-D: variable "g_supportedPIDs_21_40" was declared but never referenced
+"../obd.c", line 26: warning #179-D: variable "g_supportedPIDs_41_60" was declared but never referenced
+"../obd.c", line 27: warning #552-D: variable "g_initialized" was set but never used
+"../obd.c", line 480: warning #179-D: function "OBD_ParseDTC" was declared but never referenced
+3 errors detected in the compilation of "../obd.c".
+gmake: *** [obd.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../obd.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="obd.d_raw"  "../obd.c"
+"../obd.c", line 632: warning #179-D: variable "pidGroup" was declared but never referenced
+"../obd.c", line 27: warning #552-D: variable "g_initialized" was set but never used
+Finished building: "../obd.c"
+ 
+Building target: "OBD-II_Diagnostics.out"
+Invoking: Arm Linker
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"OBD-II_Diagnostics.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="OBD-II_Diagnostics_linkInfo.xml" --rom_model -o "OBD-II_Diagnostics.out" "./can.obj" "./delay.obj" "./main.obj" "./obd.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd"  -llibc.a 
+<Linking>
+Finished building target: "OBD-II_Diagnostics.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project OBD-II_Diagnostics ****
+
+"C:\\ti\\ccs1281\\ccs\\utils\\bin\\gmake" -k -j 6 all -O 
+ 
+Building file: "../obd.c"
+Invoking: Arm Compiler
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="Z:/OBD-II_Diagnostics" --include_path="C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="obd.d_raw"  "../obd.c"
+Finished building: "../obd.c"
+ 
+Building target: "OBD-II_Diagnostics.out"
+Invoking: Arm Linker
+"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"OBD-II_Diagnostics.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1281/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="OBD-II_Diagnostics_linkInfo.xml" --rom_model -o "OBD-II_Diagnostics.out" "./can.obj" "./delay.obj" "./main.obj" "./obd.obj" "./tm4c123gh6pm_startup_ccs.obj" "../tm4c123gh6pm.cmd"  -llibc.a 
+<Linking>
+Finished building target: "OBD-II_Diagnostics.out"
+ 
+
+**** Build Finished ****

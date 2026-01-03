@@ -2,7 +2,7 @@
 #define GPIO_H
 
 #include <stdint.h>
-#include "tm4c123gh6pm.h"
+#include "tm4c123gh6pm_registers.h"
 
 typedef enum {
     GPIO_PORTA = 0,
