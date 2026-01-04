@@ -12,9 +12,6 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./can.obj" \
 "./delay.obj" \
-"./i2c.obj" \
-"./lcd.obj" \
-"./led.obj" \
 "./main.obj" \
 "./obd.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
@@ -148,8 +145,8 @@ OBD-II_Diagnostics.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "can.obj" "delay.obj" "i2c.obj" "lcd.obj" "led.obj" "main.obj" "obd.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "can.d" "delay.d" "i2c.d" "lcd.d" "led.d" "main.d" "obd.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "can.obj" "delay.obj" "main.obj" "obd.obj" "tm4c123gh6pm_startup_ccs.obj" 
+	-$(RM) "can.d" "delay.d" "main.d" "obd.d" "tm4c123gh6pm_startup_ccs.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

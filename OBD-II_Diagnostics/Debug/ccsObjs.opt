@@ -1,5 +1,8 @@
 "./can.obj"
 "./delay.obj"
+"./i2c.obj"
+"./lcd.obj"
+"./led.obj"
 "./main.obj"
 "./obd.obj"
 "./tm4c123gh6pm_startup_ccs.obj"

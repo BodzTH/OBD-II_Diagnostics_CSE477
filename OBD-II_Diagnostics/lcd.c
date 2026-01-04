@@ -10,7 +10,7 @@
 *
 *******************************************************************************/
 
-#include "LCD.h"
+#include "lcd.h"
 #include "i2c.h"
 #include "delay.h"
 #include <string.h>

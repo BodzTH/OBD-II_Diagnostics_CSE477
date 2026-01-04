@@ -528,6 +528,6 @@ void I2C_ScanBus(uint8* foundDevices, uint8* count)
             foundDevices[*count] = addr;
             (*count)++;
         }
-        Delay_MS(1);
+        delay_ms(1);
     }
 }
