@@ -1,43 +1,57 @@
 #include "pushbutton.h"
-#include "gpio.h"
 #include "tm4c123gh6pm_registers.h"
 
-/* Button Configuration */
-#define BUTTON_PORT  GPIO_PORTF
-#define BUTTON_PIN   PIN4  /* PF4 */
+/* SW1 Configuration - PF4 */
+#define SW1_PIN      (1u << 4)  /* PF4 */
 
-static uint8 buttonLastState = 1; /* Button is active low, so start as not pressed */
+static boolean sw1LastState = FALSE;
 
 void Button_Init(void) {
-    /* Initialize button as input with pull-up */
-    GPIO_InitPin(BUTTON_PORT, BUTTON_PIN, GPIO_INPUT);
+    /* Enable clock for PORTF */
+    SYSCTL_RCGCGPIO_REG |= (1u << 5u);
     
-    /* Configure pull-up in hardware registers directly */
-    volatile uint32* portFBase = (volatile uint32*)0x40025000;
-    portFBase[3] |= BUTTON_PIN;  /* PUR register offset */
+    /* Wait for clock to be ready */
+    while((SYSCTL_PRGPIO_REG & (1u << 5u)) == 0u);
+    
+    /* Unlock PORTF to allow configuration of PF4 */
+    GPIO_PORTF_LOCK_REG = 0x4C4F434Bu; /* Unlock key */
+    GPIO_PORTF_CR_REG = 0x1Fu;         /* Allow changes to PF4-0 */
+    
+    /* Configure PF4 (SW1) as input */
+    GPIO_PORTF_DIR_REG &= ~SW1_PIN;
+    
+    /* Enable pull-up resistor for SW1 (active low) */
+    GPIO_PORTF_PUR_REG |= SW1_PIN;
+    
+    /* Enable digital function for SW1 */
+    GPIO_PORTF_DEN_REG |= SW1_PIN;
     
     /* Read initial state */
-    buttonLastState = GPIO_ReadPin(BUTTON_PORT, BUTTON_PIN);
+    sw1LastState = Button_IsPressed();
 }
 
-uint8 Button_IsPressed(void) {
-    /* Button is active low (0 when pressed) */
-    if(GPIO_ReadPin(BUTTON_PORT, BUTTON_PIN) == 0) {
-        return TRUE;
+boolean Button_IsPressed(void) {
+    /* SW1 is active low (0 when pressed) */
+    /* Check if SW1 pin is LOW (pressed) */
+    if((GPIO_PORTF_DATA_REG & SW1_PIN) == 0u) {
+        return TRUE;  /* Button is pressed */
     } else {
-        return FALSE;
+        return FALSE; /* Button is not pressed */
     }
 }
 
-uint8 Button_WasPressed(void) {
-    uint8 currentState = Button_IsPressed();
-    uint8 wasPressed = FALSE;
+boolean Button_WasPressed(void) {
+    boolean currentState = Button_IsPressed();
+    boolean wasPressed = FALSE;
     
-    /* Check for rising edge (button was just released) */
-    if(buttonLastState == TRUE && currentState == FALSE) {
+    /* Detect rising edge (button was just released) */
+    /* This detects when button goes from pressed to not pressed */
+    if(sw1LastState == TRUE && currentState == FALSE) {
         wasPressed = TRUE;
     }
     
-    buttonLastState = currentState;
+    /* Update last state */
+    sw1LastState = currentState;
+    
     return wasPressed;
 }
