@@ -14,27 +14,22 @@ typedef enum {
 } GPIO_Port;
 
 /* Pin Definitions */
-#define PIN0  (1 << 0)
-#define PIN1  (1 << 1)
-#define PIN2  (1 << 2)
-#define PIN3  (1 << 3)
-#define PIN4  (1 << 4)
-#define PIN5  (1 << 5)
-#define PIN6  (1 << 6)
-#define PIN7  (1 << 7)
+#define PIN0  (1u << 0)
+#define PIN1  (1u << 1)
+#define PIN2  (1u << 2)
+#define PIN3  (1u << 3)
+#define PIN4  (1u << 4)
+#define PIN5  (1u << 5)
+#define PIN6  (1u << 6)
+#define PIN7  (1u << 7)
 
 /* Direction */
-#define GPIO_INPUT  0
-#define GPIO_OUTPUT 1
+#define GPIO_INPUT  0u
+#define GPIO_OUTPUT 1u
 
 /* Level */
-#define GPIO_LOW    0
-#define GPIO_HIGH   1
-
-/* Pull Configuration */
-#define GPIO_PULL_NONE   0
-#define GPIO_PULL_UP     1
-#define GPIO_PULL_DOWN   2
+#define GPIO_LOW    0u
+#define GPIO_HIGH   1u
 
 /* Simple GPIO Functions */
 void GPIO_InitPin(GPIO_Port port, uint8 pin, uint8 direction);
@@ -46,4 +41,4 @@ void GPIO_TogglePin(GPIO_Port port, uint8 pin);
 #define GPIO_SET(port, pin)    GPIO_WritePin(port, pin, GPIO_HIGH)
 #define GPIO_CLEAR(port, pin)  GPIO_WritePin(port, pin, GPIO_LOW)
 
-#endif
+#endif /* GPIO_H */
