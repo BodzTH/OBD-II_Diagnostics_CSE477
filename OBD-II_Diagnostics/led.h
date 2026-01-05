@@ -30,4 +30,4 @@ void LED_Toggle(uint8 color);
 #define GREEN_OFF()   LED_Off(LED_GREEN)
 #define GREEN_TOGGLE() LED_Toggle(LED_GREEN)
 
-#endif
+#endif /* LEDS_H */
