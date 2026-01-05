@@ -1,59 +1,93 @@
 #include "gpio.h"
 #include "tm4c123gh6pm_registers.h"
 
-/* System Control Registers */
-#define SYSCTL_RCGCGPIO_R  (*((volatile uint32 *)0x400FE608))
-#define SYSCTL_PRGPIO_R    (*((volatile uint32 *)0x400FEA08))
+/* Get the correct GPIO data register for a specific pin */
+static volatile uint32* getDataReg(GPIO_Port port) {
+    switch(port) {
+        case GPIO_PORTA: return &GPIO_PORTA_DATA_REG;
+        case GPIO_PORTB: return &GPIO_PORTB_DATA_REG;
+        case GPIO_PORTC: return &GPIO_PORTC_DATA_REG;
+        case GPIO_PORTD: return &GPIO_PORTD_DATA_REG;
+        case GPIO_PORTE: return &GPIO_PORTE_DATA_REG;
+        case GPIO_PORTF: return &GPIO_PORTF_DATA_REG;
+        default: return &GPIO_PORTA_DATA_REG;
+    }
+}
 
-/* GPIO Base Addresses */
-static volatile uint32* GPIO_BASE[] = {
-    (volatile uint32*)0x40004000,  /* PORTA */
-    (volatile uint32*)0x40005000,  /* PORTB */
-    (volatile uint32*)0x40006000,  /* PORTC */
-    (volatile uint32*)0x40007000,  /* PORTD */
-    (volatile uint32*)0x40024000,  /* PORTE */
-    (volatile uint32*)0x40025000   /* PORTF */
-};
+/* Get the correct GPIO direction register for a port */
+static volatile uint32* getDirReg(GPIO_Port port) {
+    switch(port) {
+        case GPIO_PORTA: return &GPIO_PORTA_DIR_REG;
+        case GPIO_PORTB: return &GPIO_PORTB_DIR_REG;
+        case GPIO_PORTC: return &GPIO_PORTC_DIR_REG;
+        case GPIO_PORTD: return &GPIO_PORTD_DIR_REG;
+        case GPIO_PORTE: return &GPIO_PORTE_DIR_REG;
+        case GPIO_PORTF: return &GPIO_PORTF_DIR_REG;
+        default: return &GPIO_PORTA_DIR_REG;
+    }
+}
 
-/* Register Offsets */
-#define DATA_OFFSET   0
-#define DIR_OFFSET    1
-#define DEN_OFFSET    5
+/* Get the correct GPIO DEN register for a port */
+static volatile uint32* getDenReg(GPIO_Port port) {
+    switch(port) {
+        case GPIO_PORTA: return &GPIO_PORTA_DEN_REG;
+        case GPIO_PORTB: return &GPIO_PORTB_DEN_REG;
+        case GPIO_PORTC: return &GPIO_PORTC_DEN_REG;
+        case GPIO_PORTD: return &GPIO_PORTD_DEN_REG;
+        case GPIO_PORTE: return &GPIO_PORTE_DEN_REG;
+        case GPIO_PORTF: return &GPIO_PORTF_DEN_REG;
+        default: return &GPIO_PORTA_DEN_REG;
+    }
+}
+
+/* Get the correct GPIO PUR register for a port */
+static volatile uint32* getPurReg(GPIO_Port port) {
+    switch(port) {
+        case GPIO_PORTA: return &GPIO_PORTA_PUR_REG;
+        case GPIO_PORTB: return &GPIO_PORTB_PUR_REG;
+        case GPIO_PORTC: return &GPIO_PORTC_PUR_REG;
+        case GPIO_PORTD: return &GPIO_PORTD_PUR_REG;
+        case GPIO_PORTE: return &GPIO_PORTE_PUR_REG;
+        case GPIO_PORTF: return &GPIO_PORTF_PUR_REG;
+        default: return &GPIO_PORTA_PUR_REG;
+    }
+}
 
 void GPIO_InitPin(GPIO_Port port, uint8 pin, uint8 direction) {
-    /* Enable clock for the port */
-    SYSCTL_RCGCGPIO_R |= (1 << port);
+    /* Enable clock for the GPIO port */
+    SYSCTL_RCGCGPIO_REG |= (1u << port);
     
     /* Wait for clock to be ready */
-    while((SYSCTL_PRGPIO_R & (1 << port)) == 0);
+    while((SYSCTL_PRGPIO_REG & (1u << port)) == 0u);
     
-    volatile uint32* portBase = GPIO_BASE[port];
+    volatile uint32* dirReg = getDirReg(port);
+    volatile uint32* denReg = getDenReg(port);
     
-    /* Set direction */
+    /* Configure direction */
     if(direction == GPIO_OUTPUT) {
-        portBase[DIR_OFFSET] |= pin;
+        *dirReg |= pin;
     } else {
-        portBase[DIR_OFFSET] &= ~pin;
+        *dirReg &= ~pin;
     }
     
     /* Enable digital function */
-    portBase[DEN_OFFSET] |= pin;
+    *denReg |= pin;
 }
 
 void GPIO_WritePin(GPIO_Port port, uint8 pin, uint8 level) {
-    volatile uint32* portBase = GPIO_BASE[port];
+    volatile uint32* dataReg = getDataReg(port);
     
     if(level == GPIO_HIGH) {
-        portBase[DATA_OFFSET] |= pin;
+        *dataReg |= pin;
     } else {
-        portBase[DATA_OFFSET] &= ~pin;
+        *dataReg &= ~pin;
     }
 }
 
 uint8 GPIO_ReadPin(GPIO_Port port, uint8 pin) {
-    volatile uint32* portBase = GPIO_BASE[port];
+    volatile uint32* dataReg = getDataReg(port);
     
-    if(portBase[DATA_OFFSET] & pin) {
+    if((*dataReg & pin) != 0u) {
         return GPIO_HIGH;
     } else {
         return GPIO_LOW;
@@ -61,6 +95,6 @@ uint8 GPIO_ReadPin(GPIO_Port port, uint8 pin) {
 }
 
 void GPIO_TogglePin(GPIO_Port port, uint8 pin) {
-    volatile uint32* portBase = GPIO_BASE[port];
-    portBase[DATA_OFFSET] ^= pin;
+    volatile uint32* dataReg = getDataReg(port);
+    *dataReg ^= pin;
 }
