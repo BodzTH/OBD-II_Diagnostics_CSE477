@@ -2,7 +2,6 @@
 #define PUSHBUTTON_H
 
 #include <stdint.h>
-#include "tm4c123gh6pm_registers.h"
 
 #define SW1_PIN     0x10
 #define SW1_PRESSED 0
