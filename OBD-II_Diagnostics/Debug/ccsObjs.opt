@@ -1,10 +1,10 @@
 "./can.obj"
 "./delay.obj"
-"./i2c.obj"
 "./lcd.obj"
-"./led.obj"
 "./main.obj"
+"./mcp2515.obj"
 "./obd.obj"
+"./spi.obj"
 "./tm4c123gh6pm_startup_ccs.obj"
 "../tm4c123gh6pm.cmd"
 -llibc.a

@@ -3,7 +3,7 @@
 obd.obj: ../obd.c
 obd.obj: ../obd.h
 obd.obj: ../std_types.h
-obd.obj: ../can.h
+obd.obj: ../mcp2515.h
 obd.obj: ../delay.h
 
 ../obd.c:
@@ -12,7 +12,7 @@ obd.obj: ../delay.h
 
 ../std_types.h:
 
-../can.h:
+../mcp2515.h:
 
 ../delay.h:
 

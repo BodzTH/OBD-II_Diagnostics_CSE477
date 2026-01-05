@@ -5,19 +5,19 @@
  * File Name: obd.c
  *
  * Description: Source file for OBD-II Protocol Driver
- *              Implements SAE J1979 (ISO 15031-5) standard
- *              For automotive diagnostics via CAN bus
+ * Implements SAE J1979 (ISO 15031-5) standard
+ * For automotive diagnostics via MCP2515 CAN Controller
  *
  * Author: BodzTH
  *
  *******************************************************************************/
 
 #include "obd.h"
-#include "can.h"
+#include "mcp2515.h"
 #include "delay.h"
 
 /*******************************************************************************
- *                          Private Variables                                   *
+ * Private Variables                                   *
  *******************************************************************************/
 
 /* Cached supported PIDs bitmaps */
@@ -26,7 +26,7 @@ static uint32 g_supportedPIDs_21_40 = 0;
 static uint32 g_supportedPIDs_41_60 = 0;
 
 /*******************************************************************************
- *                          Private Function Prototypes                         *
+ * Private Function Prototypes                         *
  *******************************************************************************/
 
 static uint8 OBD_SendRequest(uint8 mode, uint8 pid);
@@ -34,7 +34,7 @@ static uint8 OBD_ReceiveResponse(OBD_Response *response);
 static void OBD_ParseDTC(uint8 highByte, uint8 lowByte, OBD_DTC *dtc);
 
 /*******************************************************************************
- *                          Function Definitions                                *
+ * Function Definitions                                *
  *******************************************************************************/
 
 /*
@@ -42,27 +42,36 @@ static void OBD_ParseDTC(uint8 highByte, uint8 lowByte, OBD_DTC *dtc);
  */
 uint8 OBD_Init(void)
 {
-    CAN_ConfigType canConfig;
+    MCP2515_Config canConfig;
     uint8 status;
     
     /* Configure CAN for OBD-II (500 kbps standard) */
-    canConfig.baudRate = CAN_BAUD_RATE_500KBPS;
+    canConfig.baudRate = MCP2515_BAUD_500KBPS;
     canConfig.loopbackMode = FALSE;
     
-    /* Initialize CAN driver */
-    status = CAN_Init(&canConfig);
-    if (status != CAN_STATUS_OK)
+    /* Initialize MCP2515 driver */
+    status = MCP2515_Init(&canConfig);
+    if (status != MCP2515_STATUS_OK)
     {
         return OBD_STATUS_ERROR;
     }
     
-    /* Configure receive filter for OBD-II ECU responses (0x7E8 - 0x7EF) */
-    /* Use mask 0x7F8 to accept IDs from 0x7E8 to 0x7EF */
-    status = CAN_ConfigureRxFilter(CAN_MSG_OBJ_RX, OBD_RESPONSE_ID_MIN, 0x7F8);
-    if (status != CAN_STATUS_OK)
-    {
-        return OBD_STATUS_ERROR;
-    }
+    /* Configure receive filters for OBD-II ECU responses (0x7E8 - 0x7EF) */
+    /* We need to set masks and filters to accept this range.
+     * Mask 0x7F8 with Filter 0x7E8 will accept 0x7E8 through 0x7EF.
+     */
+    
+    /* Configure Masks 0 and 1 */
+    MCP2515_ConfigureMask(0, 0x7F8, MCP2515_FRAME_STD);
+    MCP2515_ConfigureMask(1, 0x7F8, MCP2515_FRAME_STD);
+    
+    /* Configure Filters to look for 0x7E8 base */
+    MCP2515_ConfigureFilter(0, OBD_RESPONSE_ID_MIN, MCP2515_FRAME_STD);
+    MCP2515_ConfigureFilter(1, OBD_RESPONSE_ID_MIN, MCP2515_FRAME_STD);
+    MCP2515_ConfigureFilter(2, OBD_RESPONSE_ID_MIN, MCP2515_FRAME_STD);
+    MCP2515_ConfigureFilter(3, OBD_RESPONSE_ID_MIN, MCP2515_FRAME_STD);
+    MCP2515_ConfigureFilter(4, OBD_RESPONSE_ID_MIN, MCP2515_FRAME_STD);
+    MCP2515_ConfigureFilter(5, OBD_RESPONSE_ID_MIN, MCP2515_FRAME_STD);
     
     /* Small delay for initialization */
     Delay_MS(10);
@@ -78,12 +87,12 @@ uint8 OBD_Init(void)
  */
 static uint8 OBD_SendRequest(uint8 mode, uint8 pid)
 {
-    CAN_Message txMsg;
+    MCP2515_Message txMsg;
     
     /* Configure CAN message for OBD-II request */
-    txMsg.msgID = OBD_REQUEST_ID;    /* Functional address 0x7DF */
-    txMsg.msgIDType = CAN_FRAME_STD;
-    txMsg.dataLength = 8;
+    txMsg.id = OBD_REQUEST_ID;    /* Functional address 0x7DF */
+    txMsg.idType = MCP2515_FRAME_STD;
+    txMsg.dlc = 8;
     
     /* OBD-II single frame format */
     txMsg.data[0] = 0x02;           /* Number of additional bytes */
@@ -95,7 +104,12 @@ static uint8 OBD_SendRequest(uint8 mode, uint8 pid)
     txMsg.data[6] = 0x00;           /* Padding */
     txMsg.data[7] = 0x00;           /* Padding */
     
-    return CAN_Transmit(&txMsg);
+    if (MCP2515_Transmit(&txMsg) != MCP2515_STATUS_OK)
+    {
+        return OBD_STATUS_ERROR;
+    }
+    
+    return OBD_STATUS_OK;
 }
 
 /*
@@ -103,20 +117,20 @@ static uint8 OBD_SendRequest(uint8 mode, uint8 pid)
  */
 static uint8 OBD_ReceiveResponse(OBD_Response *response)
 {
-    CAN_Message rxMsg;
+    MCP2515_Message rxMsg;
     uint8 status;
     uint8 frameLength;
     uint8 i;
     
     /* Receive CAN message with timeout */
-    status = CAN_Receive(&rxMsg, OBD_RESPONSE_TIMEOUT);
-    if (status != CAN_STATUS_OK)
+    status = MCP2515_ReceiveWithTimeout(&rxMsg, OBD_RESPONSE_TIMEOUT);
+    if (status != MCP2515_STATUS_OK)
     {
         return OBD_STATUS_TIMEOUT;
     }
     
     /* Verify response ID is in valid range */
-    if (rxMsg.msgID < OBD_RESPONSE_ID_MIN || rxMsg.msgID > OBD_RESPONSE_ID_MAX)
+    if (rxMsg.id < OBD_RESPONSE_ID_MIN || rxMsg.id > OBD_RESPONSE_ID_MAX)
     {
         return OBD_STATUS_INVALID_DATA;
     }
@@ -163,7 +177,7 @@ uint8 OBD_Request(uint8 mode, uint8 pid, OBD_Response *response)
     
     /* Send request */
     status = OBD_SendRequest(mode, pid);
-    if (status != CAN_STATUS_OK)
+    if (status != OBD_STATUS_OK)
     {
         return OBD_STATUS_ERROR;
     }
@@ -368,7 +382,7 @@ uint8 OBD_GetFuelLevel(uint8 *level)
         return status;
     }
     
-    if (response. dataLength >= 1)
+    if (response.dataLength >= 1)
     {
         *level = (uint8)(((uint16)response.data[0] * 100) / 255);
         return OBD_STATUS_OK;
@@ -429,7 +443,7 @@ uint8 OBD_GetMAFRate(uint16 *rate)
     
     if (response.dataLength >= 2)
     {
-        *rate = ((uint16)response.data[0] * 256 + response. data[1]);
+        *rate = ((uint16)response.data[0] * 256 + response.data[1]);
         return OBD_STATUS_OK;
     }
     
@@ -497,8 +511,8 @@ static void OBD_ParseDTC(uint8 highByte, uint8 lowByte, OBD_DTC *dtc)
  */
 uint8 OBD_ReadDTCs(OBD_DTC *dtcArray, uint8 *dtcCount)
 {
-    CAN_Message txMsg;
-    CAN_Message rxMsg;
+    MCP2515_Message txMsg;
+    MCP2515_Message rxMsg;
     uint8 status;
     uint8 numDTCs;
     uint8 i;
@@ -512,9 +526,9 @@ uint8 OBD_ReadDTCs(OBD_DTC *dtcArray, uint8 *dtcCount)
     *dtcCount = 0;
     
     /* Send Mode 03 request (no PID needed) */
-    txMsg.msgID = OBD_REQUEST_ID;
-    txMsg.msgIDType = CAN_FRAME_STD;
-    txMsg.dataLength = 8;
+    txMsg.id = OBD_REQUEST_ID;
+    txMsg.idType = MCP2515_FRAME_STD;
+    txMsg.dlc = 8;
     txMsg.data[0] = 0x01;           /* Number of additional bytes */
     txMsg.data[1] = OBD_MODE_DTC_CODES;  /* Mode 03 */
     txMsg.data[2] = 0x00;
@@ -522,23 +536,22 @@ uint8 OBD_ReadDTCs(OBD_DTC *dtcArray, uint8 *dtcCount)
     txMsg.data[4] = 0x00;
     txMsg.data[5] = 0x00;
     txMsg.data[6] = 0x00;
-    txMsg. data[7] = 0x00;
+    txMsg.data[7] = 0x00;
     
-    status = CAN_Transmit(&txMsg);
-    if (status != CAN_STATUS_OK)
+    if (MCP2515_Transmit(&txMsg) != MCP2515_STATUS_OK)
     {
         return OBD_STATUS_ERROR;
     }
     
     /* Receive response */
-    status = CAN_Receive(&rxMsg, OBD_RESPONSE_TIMEOUT);
-    if (status != CAN_STATUS_OK)
+    status = MCP2515_ReceiveWithTimeout(&rxMsg, OBD_RESPONSE_TIMEOUT);
+    if (status != MCP2515_STATUS_OK)
     {
         return OBD_STATUS_TIMEOUT;
     }
     
     /* Verify response */
-    if (rxMsg.msgID < OBD_RESPONSE_ID_MIN || rxMsg.msgID > OBD_RESPONSE_ID_MAX)
+    if (rxMsg.id < OBD_RESPONSE_ID_MIN || rxMsg.id > OBD_RESPONSE_ID_MAX)
     {
         return OBD_STATUS_INVALID_DATA;
     }
@@ -562,7 +575,7 @@ uint8 OBD_ReadDTCs(OBD_DTC *dtcArray, uint8 *dtcCount)
     for (i = 0; i < numDTCs && byteIndex < 7; i++)
     {
         /* Skip zero DTCs (no fault) */
-        if (rxMsg. data[byteIndex] == 0x00 && rxMsg.data[byteIndex + 1] == 0x00)
+        if (rxMsg.data[byteIndex] == 0x00 && rxMsg.data[byteIndex + 1] == 0x00)
         {
             byteIndex += 2;
             continue;
@@ -581,32 +594,31 @@ uint8 OBD_ReadDTCs(OBD_DTC *dtcArray, uint8 *dtcCount)
  */
 uint8 OBD_ClearDTCs(void)
 {
-    CAN_Message txMsg;
-    CAN_Message rxMsg;
+    MCP2515_Message txMsg;
+    MCP2515_Message rxMsg;
     uint8 status;
     
     /* Send Mode 04 request */
-    txMsg. msgID = OBD_REQUEST_ID;
-    txMsg. msgIDType = CAN_FRAME_STD;
-    txMsg.dataLength = 8;
+    txMsg.id = OBD_REQUEST_ID;
+    txMsg.idType = MCP2515_FRAME_STD;
+    txMsg.dlc = 8;
     txMsg.data[0] = 0x01;               /* Number of additional bytes */
     txMsg.data[1] = OBD_MODE_CLEAR_DTC;  /* Mode 04 */
     txMsg.data[2] = 0x00;
-    txMsg. data[3] = 0x00;
+    txMsg.data[3] = 0x00;
     txMsg.data[4] = 0x00;
     txMsg.data[5] = 0x00;
     txMsg.data[6] = 0x00;
     txMsg.data[7] = 0x00;
     
-    status = CAN_Transmit(&txMsg);
-    if (status != CAN_STATUS_OK)
+    if (MCP2515_Transmit(&txMsg) != MCP2515_STATUS_OK)
     {
         return OBD_STATUS_ERROR;
     }
     
     /* Receive acknowledgment */
-    status = CAN_Receive(&rxMsg, OBD_RESPONSE_TIMEOUT);
-    if (status != CAN_STATUS_OK)
+    status = MCP2515_ReceiveWithTimeout(&rxMsg, OBD_RESPONSE_TIMEOUT);
+    if (status != MCP2515_STATUS_OK)
     {
         return OBD_STATUS_TIMEOUT;
     }
