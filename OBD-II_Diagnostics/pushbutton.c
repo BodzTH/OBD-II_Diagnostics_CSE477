@@ -1,39 +1,43 @@
 #include "pushbutton.h"
+#include "gpio.h"
+#include "tm4c123gh6pm_registers.h"
 
-static uint8_t lastState = 1;
+/* Button Configuration */
+#define BUTTON_PORT  GPIO_PORTF
+#define BUTTON_PIN   PIN4  /* PF4 */
+
+static uint8 buttonLastState = 1; /* Button is active low, so start as not pressed */
 
 void Button_Init(void) {
-    SYSCTL_RCGCGPIO_R |= SYSCTL_RCGCGPIO_R5;
-    while((SYSCTL_PRGPIO_R & SYSCTL_PRGPIO_R5) == 0);
+    /* Initialize button as input with pull-up */
+    GPIO_InitPin(BUTTON_PORT, BUTTON_PIN, GPIO_INPUT);
     
-    GPIO_PORTF_LOCK_R = 0x4C4F434B;
-    GPIO_PORTF_CR_R = 0x1F;
+    /* Configure pull-up in hardware registers directly */
+    volatile uint32* portFBase = (volatile uint32*)0x40025000;
+    portFBase[3] |= BUTTON_PIN;  /* PUR register offset */
     
-    GPIO_PORTF_DIR_R &= ~SW1_PIN;
-    GPIO_PORTF_PUR_R |= SW1_PIN;
-    GPIO_PORTF_DEN_R |= SW1_PIN;
+    /* Read initial state */
+    buttonLastState = GPIO_ReadPin(BUTTON_PORT, BUTTON_PIN);
+}
+
+uint8 Button_IsPressed(void) {
+    /* Button is active low (0 when pressed) */
+    if(GPIO_ReadPin(BUTTON_PORT, BUTTON_PIN) == 0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+uint8 Button_WasPressed(void) {
+    uint8 currentState = Button_IsPressed();
+    uint8 wasPressed = FALSE;
     
-    lastState = Button_Read();
-}
-
-uint8_t Button_Read(void) {
-    return (GPIO_PORTF_DATA_R & SW1_PIN) ? 0 : 1;
-}
-
-uint8_t Button_IsPressed(void) {
-    return Button_Read();
-}
-
-uint8_t Button_WasPressed(void) {
-    uint8_t current = Button_Read();
-    uint8_t pressed = (lastState == 0 && current == 1);
-    lastState = current;
-    return pressed;
-}
-
-uint8_t Button_WasReleased(void) {
-    uint8_t current = Button_Read();
-    uint8_t released = (lastState == 1 && current == 0);
-    lastState = current;
-    return released;
+    /* Check for rising edge (button was just released) */
+    if(buttonLastState == TRUE && currentState == FALSE) {
+        wasPressed = TRUE;
+    }
+    
+    buttonLastState = currentState;
+    return wasPressed;
 }
